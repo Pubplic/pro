@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة الخدمات العامة - النظام المتكامل</title>
+    <title>بوابة الخدمات العامة - نظام تسجيل الدخول</title>
     <style>
-        /* ==========================================================================
-           1. التنسيق العام والمشترك (Global Styles)
-           ========================================================================== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -16,34 +13,21 @@
         }
 
         body {
-            background-color: #f4f6f9;
+            background-color: #0f172a; /* لون خلفية غامق وأنيق بديل للصورة لضمان عدم حدوث أخطاء */
             color: #333;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* خلفية مخصصة فقط لصفحة تسجيل الدخول */
-        .bg-login {
-            background-image: url('background.jpg'); /* استبدل background.jpg باسم ملف صورتك */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-        }
-
-        /* ==========================================================================
-           2. تنسيق شريط التنقل العلوي (Navbar)
-           ========================================================================== */
+        /* شريط التنقل العلوي */
         .navbar {
-            background-color: rgba(26, 54, 93, 0.95);
+            background-color: #1e293b;
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            position: relative;
-            z-index: 10;
         }
 
         .navbar .logo {
@@ -56,58 +40,15 @@
             list-style: none;
             display: flex;
             gap: 25px;
-            align-items: center;
         }
 
         .nav-links a {
-            color: #fff;
+            color: #cbd5e1;
             text-decoration: none;
             font-size: 16px;
-            font-weight: 500;
-            transition: color 0.3s;
         }
 
-        .nav-links a:hover {
-            color: #cbd5e1;
-        }
-
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: #ffffff;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            border-radius: 4px;
-            list-style: none;
-            padding: 10px 0;
-            margin-top: 10px;
-        }
-
-        .dropdown-menu li a {
-            color: #333;
-            padding: 10px 20px;
-            display: block;
-            font-size: 14px;
-        }
-
-        .dropdown-menu li a:hover {
-            background-color: #f4f6f9;
-            color: #1a365d;
-        }
-
-        .dropdown:hover .dropdown-menu {
-            display: block;
-        }
-
-        /* ==========================================================================
-           3. تنسيق واجهة تسجيل الدخول (Login UI)
-           ========================================================================== */
+        /* واجهة تسجيل الدخول */
         .login-section {
             flex: 1;
             display: flex;
@@ -119,18 +60,16 @@
         .login-container {
             width: 100%;
             max-width: 420px;
-            background: rgba(255, 255, 255, 0.95);
+            background: #ffffff;
             padding: 35px;
             border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .login-container h2 {
             text-align: center;
             margin-bottom: 25px;
-            color: #1a365d;
-            font-size: 24px;
+            color: #1e293b;
         }
 
         .form-group {
@@ -142,8 +81,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            font-size: 14px;
-            color: #4a5568;
+            color: #475569;
         }
 
         .form-group input {
@@ -153,285 +91,181 @@
             border-radius: 6px;
             font-size: 16px;
             outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
         .form-group input:focus {
-            border-color: #1a365d;
-            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+            border-color: #3b82f6;
         }
 
         .toggle-password {
             position: absolute;
             left: 15px;
-            top: 38px;
+            top: 40px;
             cursor: pointer;
             font-size: 14px;
-            color: #718096;
+            color: #64748b;
             user-select: none;
         }
 
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-            color: #4a5568;
-        }
-
-        .forgot-password {
-            color: #1a365d;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .forgot-password:hover {
-            text-decoration: underline;
-        }
-
         .message-box {
-            padding: 10px;
-            margin-bottom: 15px;
+            padding: 12px;
+            margin-bottom: 25px;
             border-radius: 6px;
             font-size: 14px;
             display: none;
             text-align: center;
-            font-weight: 600;
+            font-weight: bold;
         }
 
-        .error-msg { background-color: #fed7d7; color: #c53030; border: 1px solid #feb2b2; display: block; }
-        .success-msg { background-color: #c6f6d5; color: #22543d; border: 1px solid #9ae6b4; display: block; }
+        .error-msg { background-color: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; display: block; }
+        .success-msg { background-color: #dcfce7; color: #16a34a; border: 1px solid #86efac; display: block; }
 
         .btn-submit {
             width: 100%;
             padding: 12px;
-            background-color: #1a365d;
+            background-color: #3b82f6;
             color: white;
             border: none;
             border-radius: 6px;
             font-size: 16px;
             cursor: pointer;
             font-weight: bold;
-            transition: background-color 0.3s;
         }
 
-        .btn-submit:hover { background-color: #2a4d7c; }
+        .btn-submit:hover { background-color: #2563eb; }
 
+        /* تذييل الصفحة */
         .footer {
-            background-color: #1a365d;
-            color: #cbd5e1;
+            background-color: #1e293b;
+            color: #94a3b8;
             text-align: center;
             padding: 20px;
             font-size: 14px;
-            margin-top: auto;
-        }
-
-        .footer-links {
-            margin-top: 10px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
         }
 
         .footer-links button {
             background: none;
             border: none;
-            color: #fff;
+            color: #3b82f6;
             cursor: pointer;
-            font-size: 14px;
+            margin: 0 10px;
         }
 
-        .footer-links button:hover { text-decoration: underline; }
-
-        /* ==========================================================================
-           4. تنسيق لوحة التحكم (Dashboard UI) - مخفية تلقائياً
-           ========================================================================== */
+        /* واجهة لوحة التحكم (مخفية تلقائياً) */
         .dashboard-section {
-            display: none; /* مخفية في البداية ويتم تفعيلها بالجافا سكريبت */
+            display: none;
             flex-direction: column;
             flex: 1;
-            background-color: #f4f6f9;
+            background-color: #f8fafc;
+            width: 100%;
         }
 
         .dashboard-header {
-            background-color: #1a365d;
+            background-color: #1e293b;
             color: white;
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .dashboard-header .welcome-text {
-            font-size: 18px;
-            font-weight: 600;
         }
 
         .btn-logout {
-            background-color: #e53e3e;
+            background-color: #ef4444;
             color: white;
             border: none;
             padding: 8px 16px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 14px;
-            transition: background-color 0.3s;
         }
-
-        .btn-logout:hover { background-color: #c53030; }
 
         .dashboard-container {
             max-width: 1000px;
             margin: 40px auto;
             padding: 0 20px;
-            flex: 1;
         }
 
         .intro-text {
-            background-color: #ebf8ff;
-            border-right: 4px solid #3182ce;
+            background-color: #eff6ff;
+            border-right: 4px solid #3b82f6;
             padding: 15px;
             border-radius: 4px;
             margin-bottom: 30px;
-            font-size: 15px;
+            color: #1e40af;
             line-height: 1.6;
-            color: #2b6cb0;
         }
 
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
             gap: 25px;
-            margin-bottom: 30px;
         }
 
         .card {
-            background-color: white;
+            background: white;
             border-radius: 8px;
             padding: 25px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-top: 4px solid #1a365d;
+            border-top: 4px solid #3b82f6;
         }
 
-        .card h3 {
-            color: #1a365d;
-            font-size: 18px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card p {
-            font-size: 14px;
-            color: #4a5568;
-            line-height: 1.7;
-        }
+        .card h3 { color: #1e293b; margin-bottom: 12px; }
+        .card p { color: #334155; font-size: 14px; line-height: 1.7; }
 
         .security-notice {
-            background-color: #fffaf0;
-            border: 1px solid #feebc8;
-            border-right: 4px solid #dd6b20;
+            background-color: #fff7ed;
+            border-right: 4px solid #ea580c;
             padding: 20px;
             border-radius: 8px;
-            color: #dd6b20;
+            color: #c2410c;
+            margin-top: 30px;
             font-size: 14px;
-            line-height: 1.6;
-            margin-top: 20px;
         }
 
-        /* ==========================================================================
-           5. تنسيق النوافذ المنبثقة للسياسات (Modals)
-           ========================================================================== */
+        /* النوافذ المنبثقة */
         .modal {
             display: none;
             position: fixed;
             z-index: 100;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center; align-items: center; padding: 20px;
         }
 
         .modal-content {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 600px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            text-align: right;
-            line-height: 1.6;
+            background-color: #fff; padding: 30px; border-radius: 10px;
+            max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; text-align: right;
         }
 
-        .modal-content h3 { color: #1a365d; margin-bottom: 15px; border-bottom: 2px solid #f4f6f9; padding-bottom: 10px; }
-        .modal-content h4 { color: #2c5282; margin-top: 15px; margin-bottom: 5px; }
-        .modal-content p, .modal-content ul { font-size: 14px; color: #4a5568; margin-bottom: 10px; }
-        .modal-content ul { padding-right: 20px; }
-        .close-btn { background-color: #e53e3e; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; float: left; margin-top: 15px; }
-
-        @media (max-width: 600px) {
-            .grid-container { grid-template-columns: 1fr; }
-        }
+        .close-btn { background-color: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; float: left; margin-top: 15px; }
     </style>
 </head>
-<body id="mainBody" class="bg-login">
+<body id="mainBody">
 
     <div id="loginPage" style="display: flex; flex-direction: column; min-height: 100vh; width: 100%;">
         <nav class="navbar">
             <div class="logo">بوابة الخدمات العامة</div>
             <ul class="nav-links">
-                <li><a href="#home">الرئيسية</a></li>
-                <li class="dropdown">
-                    <a href="#services">الخدمات ▾</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#service1">الخدمات الإلكترونية</a></li>
-                        <li><a href="#service2">دليل المستخدم</a></li>
-                        <li><a href="#service3">الدعم الفني</a></li>
-                    </ul>
-                </li>
-                <li><a href="https://maps.app.goo.gl/YJSD57iRR1AjEB487" target="_blank" rel="noopener noreferrer">عنواننا</a></li>
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#">الخدمات</a></li>
             </ul>
         </nav>
 
-        <main class="main-content login-section">
+        <main class="login-section">
             <div class="login-container">
                 <h2>تسجيل الدخول الآمن</h2>
                 <div id="messageBox" class="message-box"></div>
 
-                <form id="loginForm" onsubmit="return validateLogin(event)">
+                <form id="loginForm" onsubmit="validateLogin(event)">
                     <div class="form-group">
-                        <label for="username">اسم المستخدم أو البريد الإلكتروني</label>
-                        <input type="text" id="username" required placeholder="أدخل اسم المستخدم">
+                        <label>اسم المستخدم</label>
+                        <input type="text" id="username" required placeholder="bassammohra26">
                     </div>
                     
                     <div class="form-group">
-                        <label for="password">كلمة المرور</label>
-                        <input type="password" id="password" required placeholder="أدخل كلمة المرور">
+                        <label>كلمة المرور</label>
+                        <input type="password" id="password" required placeholder="••••••••">
                         <span class="toggle-password" id="passwordToggle" onclick="togglePasswordVisibility()">إظهار</span>
-                    </div>
-
-                    <div class="form-options">
-                        <label class="remember-me">
-                            <input type="checkbox" name="remember"> تذكرني
-                        </label>
-                        <a href="#forgot" class="forgot-password">نسيت كلمة المرور؟</a>
                     </div>
 
                     <button type="submit" class="btn-submit">تسجيل الدخول</button>
@@ -448,51 +282,108 @@
         </footer>
     </div>
 
-
     <div id="dashboardPage" class="dashboard-section">
         <header class="dashboard-header">
-            <div class="welcome-text">مرحباً بك، bassammohra26 👋</div>
+            <div style="font-size: 18px; font-weight: bold;">مرحباً بك، bassammohra26 👋</div>
             <button class="btn-logout" onclick="logout()">تسجيل خروج آمن</button>
         </header>
 
         <main class="dashboard-container">
             <div class="intro-text">
-                عندما يقوم العميل بتسجيل الدخول إلى حسابه البنكي (سواء عبر تطبيق الهاتف أو الموقع الإلكتروني للبنك) باستخدام بياناته السرية (اسم المستخدم، كلمة المرور، ورمز التحقق OTP)، تظهر له لوحة التحكم الرئيسية (Dashboard). هذه اللوحة مصممة لتعطيه لمحة سريعة وشاملة عن وضعه المالي. إليك بالتفصيل ما يظهر للمستخدم عادةً:
+                عندما يقوم العميل بتسجيل الدخول إلى حسابه البنكي باستخدام بياناته السرية (اسم المستخدم، كلمة المرور، ورمز التحقق OTP)، تظهر له لوحة التحكم الرئيسية (Dashboard). هذه اللوحة مصممة لتعطيه لمحة سريعة وشاملة عن وضعه المالي:
             </div>
 
             <div class="grid-container">
                 <div class="card">
                     <h3>📊 1. الملخص المالي والفرعي (Accounts Overview)</h3>
                     <p>
-                        هذا أول ما تقع عليه عين المستخدم، ويشمل:<br><br>
-                        • <strong>الحسابات الجارية والتوفير:</strong> يظهر رقم الحساب (أو الآيبان IBAN محجوباً جزئياً للأمان) وبجانبه الرصيد الحالي (المبلغ الإجمالي) والرصيد المتاح (المبلغ الفعلي القابل للسحب أو الشحن بعد خصم العمليات المعلقة).<br>
-                        • <strong>البطاقات الائتمانية (Credit Cards):</strong> يظهر رقم البطاقة، الحد الائتماني الإجمالي، المبلغ المستحق الدفع، وتاريخ الاستحقاق.<br>
-                        • <strong>القروض والتمويل (Loans):</strong> إذا كان العميل مقترضاً، يظهر له إجمالي مبلغ القرض، المتبقي منه، وقيمة القسط الشهري القادم.
+                        • <strong>الحسابات الجارية والتوفير:</strong> يظهر رقم الحساب وبجانبه الرصيد الحالي والرصيد المتاح.<br>
+                        • <strong>البطاقات الائتمانية:</strong> يظهر رقم البطاقة، الحد الائتماني، والمبلغ المستحق الدفع.<br>
+                        • <strong>القروض والتمويل:</strong> يظهر إجمالي مبلغ القرض، المتبقي منه، وقيمة القسط الشهري.
                     </p>
                 </div>
 
                 <div class="card">
                     <h3>📜 2. كشف الحساب والعمليات الأخيرة (Recent Transactions)</h3>
                     <p>
-                        جدول أو قائمة تُحدث لحظياً تعرض آخر العمليات التي تمت على الحساب:<br><br>
-                        • <strong>العمليات الواردة:</strong> (رواتب، تحويلات من أشخاص آخرين) وتظهر عادةً باللون الأخضر أو بعلامة (+).<br>
-                        • <strong>العمليات الصادرة:</strong> (مشتنيات من السوبرماركت، مدفوعات إلكترونية، سحب نقدي من الصراف) وتظهر باللون الأحمر أو بعلامة (-).<br>
-                        • <strong>تفاصيل العملية:</strong> تشمل التاريخ، الوقت، اسم التاجر أو الجهة، والمبلغ.
+                        • <strong>العمليات الواردة:</strong> الرواتب والتحويلات وتظهر باللون الأخضر (+).<br>
+                        • <strong>العمليات الصادرة:</strong> المشتريات والمدفوعات الفورية وتظهر باللون الأحمر (-).
                     </p>
                 </div>
 
                 <div class="card">
-                    <h3>⚡ 3. قائمة الخدمات والعمليات السريعة (Quick Actions / Services)</h3>
+                    <h3>⚡ 3. قائمة الخدمات والعمليات السريعة (Quick Actions)</h3>
                     <p>
-                        أزرار مختصرة تمكن المستخدم من إدارة أمواله فوراً:<br><br>
-                        • <strong>التحويل المالي:</strong> (بين حساباته الشخصية، لمحلي داخل الدولة، أو تحويل دولي).<br>
-                        • <strong>سداد الفواتير:</strong> (كهرباء، مياه، إنترنت، مخالفات مرورية) عبر الأنظمة المحلية مثل (سداد، فوري، إلخ).<br>
-                        • <strong>إدارة البطاقات:</strong> إمكانية تجميد البطاقة فوراً في حال ضياعها، تغيير الحد اليومي للشراء، أو تفعيل الشراء عبر الإنترنت.
+                        • <strong>التحويل المالي:</strong> محلي، داخل البنك، أو دولي.<br>
+                        • <strong>سداد الفواتير:</strong> شحن الرصيد، دفع فواتير المياه، الكهرباء، والإنترنت.<br>
+                        • <strong>إإدارة البطاقات:</strong> إمكانية تجميد أو إيقاف البطاقات فوراً.
                     </p>
                 </div>
 
                 <div class="card">
-                    <h3>🛡️ 4. شريط الأمان والتنبيهات (Security & Notifications)</h3>
+                    <h3>🛡️ 4. شريط الأمان والتنبيهات (Security)</h3>
                     <p>
-                        • <strong>آخر تسجيل دخول:</strong> يظهر تاريخ ووقت آخر مرة دخل فيها المستخدم للحساب (للتأكد من عدم وجود اختراق).<br>
-                        • <strong>رسائل التنبيه:</strong> إشعارات من البنك (مثلاً: تحديث بيانات الهوية، عروض القروض
+                        • يظهر للمستخدم تاريخ ووقت آخر تسجيل دخول ناجح للتأكد من سلامة الحساب، مع إشعارات وتنبيهات فورية لتحديث البيانات بانتظام وتجنب الاحتيال.
+                    </p>
+                </div>
+            </div>
+
+            <div class="security-notice">
+                🔒 <strong>ملاحظة أمنية:</strong> جميع هذه البيانات تكون مشفرة بالكامل خلف جدار حماية البنك، ولا يتم حفظ هذه البيانات مؤقتاً على متصفح الإنترنت لحماية العميل.
+            </div>
+        </main>
+    </div>
+
+    <div id="privacyModal" class="modal"><div class="modal-content"><h3>سياسة الخصوصية</h3><p>مرحباً بكم، نحن نلتزم بحماية خصوصيتك وبياناتك الشخصية وكيفية استخدامها بأمان.</p><button class="close-btn" onclick="closeModal('privacyModal')">إغلاق</button></div></div>
+    <div id="termsModal" class="modal"><div class="modal-content"><h3>شروط الاستخدام</h3><p>باستخدامك للموقع، فإنك توافق على الالتزام الكامل بالشروط والأحكام القانونية المذكورة.</p><button class="close-btn" onclick="closeModal('termsModal')">إغلاق</button></div></div>
+
+    <script>
+        function validateLogin(event) {
+            event.preventDefault(); 
+
+            // البيانات الدقيقة المطلوبة
+            const correctUsername = "bassammohra26";
+            const correctPassword = "Ba11Mo910";
+
+            const usernameInput = document.getElementById("username").value.trim();
+            const passwordInput = document.getElementById("password").value.trim();
+            const messageBox = document.getElementById("messageBox");
+
+            if (usernameInput === correctUsername && passwordInput === correctPassword) {
+                // الانتقال الفوري والمباشر دون تأخير لتجنب أي تعليق
+                document.getElementById("loginPage").style.display = "none";
+                document.getElementById("mainBody").style.backgroundColor = "#f8fafc"; // تحويل الخلفية للرمادي الفاتح المريح للوحة التحكم
+                document.getElementById("dashboardPage").style.display = "flex";
+            } else {
+                messageBox.textContent = "خطأ في بيانات الدخول! يرجى التحقق من اسم المستخدم أو كلمة المرور.";
+                messageBox.className = "message-box error-msg";
+            }
+        }
+
+        function logout() {
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("messageBox").style.display = "none";
+
+            document.getElementById("dashboardPage").style.display = "none";
+            document.getElementById("mainBody").style.backgroundColor = "#0f172a";
+            document.getElementById("loginPage").style.display = "flex";
+        }
+
+        function togglePasswordVisibility() {
+            var passwordField = document.getElementById("password");
+            var toggleText = document.getElementById("passwordToggle");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleText.textContent = "إخفاء";
+            } else {
+                passwordField.type = "password";
+                toggleText.textContent = "إظهار";
+            }
+        }
+
+        function openModal(modalId) { document.getElementById(modalId).style.display = "flex"; }
+        function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
+    </script>
+</body>
+</html>
