@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بوابة الخدمات العامة - تسجيل الدخول</title>
     <style>
-        /* إعدادات التنسيق العام */
+        /* إعدادات التنسيق العام لتهيئة الصفحة */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -14,12 +14,12 @@
         }
 
         body {
-            /* إعدادات صورة الخلفية */
-            background-image: url('background.jpg'); /* استبدل background.jpg باسم ملف صورتك أو برابطها */
-            background-size: cover; /* تجعل الصورة تغطي الشاشة بالكامل */
-            background-position: center; /* لتوسيط الصورة */
-            background-attachment: fixed; /* تثبيت الخلفية عند التمرير */
-            background-repeat: no-repeat; /* منع تكرار الصورة */
+            /* إعدادات الخلفية للموقع */
+            background-image: url('background.jpg'); /* استبدل background.jpg باسم ملف صورتك أو برابطها المباشر */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
             
             color: #333;
             min-height: 100vh;
@@ -27,9 +27,9 @@
             flex-direction: column;
         }
 
-        /* تنسيق شريط التنقل العلوي */
+        /* تنسيق شريط التنقل العلوي (Navbar) */
         .navbar {
-            background-color: rgba(26, 54, 93, 0.95); /* لون أزرق مع شفافية بسيطة لتتماشى مع الخلفية */
+            background-color: rgba(26, 54, 93, 0.95); /* لون أزرق داكن مع شفافية خفيفة */
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
@@ -58,10 +58,10 @@
         }
 
         .nav-links a:hover {
-            color: #cbd5e1; /* يتغير اللون عند تمرير الفأرة */
+            color: #cbd5e1; /* تفتيح اللون عند تمرير الفأرة فوق الروابط */
         }
 
-        /* تنسيق حاوية نموذج تسجيل الدخول */
+        /* تنسيق قسم المحتوى الرئيسي وتوسط النموذج */
         .main-content {
             flex: 1;
             display: flex;
@@ -70,14 +70,15 @@
             padding: 20px;
         }
 
+        /* تنسيق واجهة صندوق تسجيل الدخول */
         .login-container {
             width: 100%;
             max-width: 420px;
-            background: rgba(255, 255, 255, 0.95); /* خلفية بيضاء شبه شفافة لتوفر وضوحاً ممتازاً للنصوص */
+            background: rgba(255, 255, 255, 0.95); /* خلفية بيضاء شفافة لتظهر الخلفية من ورائها بشكل أنيق */
             padding: 35px;
             border-radius: 12px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            backdrop-filter: blur(5px); /* تأثير ضبابي خفيف للخلفية وراء الحاوية */
+            backdrop-filter: blur(5px); /* تأثير ضبابي للخلفية يساهم في وضوح النصوص */
         }
 
         .login-container h2 {
@@ -114,7 +115,7 @@
             box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
         }
 
-        /* تنسيق زر الإرسال */
+        /* تنسيق زر تسجيل الدخول */
         .btn-submit {
             width: 100%;
             padding: 12px;
@@ -136,14 +137,17 @@
 </head>
 <body>
 
+    <!-- شريط التنقل العلوي للموقع -->
     <nav class="navbar">
         <div class="logo">بوابة الخدمات العامة</div>
         <ul class="nav-links">
             <li><a href="#home">الرئيسية</a></li>
-            <li><a href="#address">عنواننا</a></li>
+            <!-- هذا البند يقوم بتوجيهك إلى رابط خرائط جوجل المباشر في صفحة جديدة -->
+            <li><a href="https://maps.app.goo.gl/YJSD57iRR1AjEB487" target="_blank" rel="noopener noreferrer">عنواننا</a></li>
         </ul>
     </nav>
 
+    <!-- منطقة المحتوى التي تحتوي على واجهة الدخول -->
     <main class="main-content">
         <div class="login-container">
             <h2>تسجيل الدخول الآمن</h2>
