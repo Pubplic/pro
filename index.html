@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة الخدمات العامة - تسجيل الدخول</title>
+    <title>بوابة الخدمات العامة - النظام المتكامل</title>
     <style>
-        /* إعدادات التنسيق العام */
+        /* ==========================================================================
+           1. التنسيق العام والمشترك (Global Styles)
+           ========================================================================== */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -14,19 +16,25 @@
         }
 
         body {
-            background-image: url('background.jpg'); /* استبدل background.jpg باسم ملف صورتك أو برابطها المباشر */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            
+            background-color: #f4f6f9;
             color: #333;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* شريط التنقل العلوي */
+        /* خلفية مخصصة فقط لصفحة تسجيل الدخول */
+        .bg-login {
+            background-image: url('background.jpg'); /* استبدل background.jpg باسم ملف صورتك */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        /* ==========================================================================
+           2. تنسيق شريط التنقل العلوي (Navbar)
+           ========================================================================== */
         .navbar {
             background-color: rgba(26, 54, 93, 0.95);
             padding: 15px 30px;
@@ -63,7 +71,6 @@
             color: #cbd5e1;
         }
 
-        /* تنسيق القائمة المنسدلة (Dropdown) */
         .dropdown {
             position: relative;
         }
@@ -98,8 +105,10 @@
             display: block;
         }
 
-        /* المحتوى الرئيسي وحاوية تسجيل الدخول */
-        .main-content {
+        /* ==========================================================================
+           3. تنسيق واجهة تسجيل الدخول (Login UI)
+           ========================================================================== */
+        .login-section {
             flex: 1;
             display: flex;
             justify-content: center;
@@ -152,7 +161,6 @@
             box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
         }
 
-        /* زر إظهار/إخفاء كلمة المرور */
         .toggle-password {
             position: absolute;
             left: 15px;
@@ -163,7 +171,6 @@
             user-select: none;
         }
 
-        /* خيارات تذكرني ونسيت كلمة المرور */
         .form-options {
             display: flex;
             justify-content: space-between;
@@ -190,7 +197,6 @@
             text-decoration: underline;
         }
 
-        /* عنصر عرض رسائل الخطأ أو النجاح */
         .message-box {
             padding: 10px;
             margin-bottom: 15px;
@@ -201,21 +207,9 @@
             font-weight: 600;
         }
 
-        .error-msg {
-            background-color: #fed7d7;
-            color: #c53030;
-            border: 1px solid #feb2b2;
-            display: block;
-        }
+        .error-msg { background-color: #fed7d7; color: #c53030; border: 1px solid #feb2b2; display: block; }
+        .success-msg { background-color: #c6f6d5; color: #22543d; border: 1px solid #9ae6b4; display: block; }
 
-        .success-msg {
-            background-color: #c6f6d5;
-            color: #22543d;
-            border: 1px solid #9ae6b4;
-            display: block;
-        }
-
-        /* زر الإرسال */
         .btn-submit {
             width: 100%;
             padding: 12px;
@@ -229,11 +223,8 @@
             transition: background-color 0.3s;
         }
 
-        .btn-submit:hover {
-            background-color: #2a4d7c;
-        }
+        .btn-submit:hover { background-color: #2a4d7c; }
 
-        /* تذييل الصفحة (Footer) */
         .footer {
             background-color: #1a365d;
             color: #cbd5e1;
@@ -256,14 +247,112 @@
             color: #fff;
             cursor: pointer;
             font-size: 14px;
-            text-decoration: none;
         }
 
-        .footer-links button:hover {
-            text-decoration: underline;
+        .footer-links button:hover { text-decoration: underline; }
+
+        /* ==========================================================================
+           4. تنسيق لوحة التحكم (Dashboard UI) - مخفية تلقائياً
+           ========================================================================== */
+        .dashboard-section {
+            display: none; /* مخفية في البداية ويتم تفعيلها بالجافا سكريبت */
+            flex-direction: column;
+            flex: 1;
+            background-color: #f4f6f9;
         }
 
-        /* تنسيق النوافذ المنبثقة للسياسات والشروط (Modal) */
+        .dashboard-header {
+            background-color: #1a365d;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-header .welcome-text {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .btn-logout {
+            background-color: #e53e3e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-logout:hover { background-color: #c53030; }
+
+        .dashboard-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .intro-text {
+            background-color: #ebf8ff;
+            border-right: 4px solid #3182ce;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #2b6cb0;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid #1a365d;
+        }
+
+        .card h3 {
+            color: #1a365d;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .security-notice {
+            background-color: #fffaf0;
+            border: 1px solid #feebc8;
+            border-right: 4px solid #dd6b20;
+            padding: 20px;
+            border-radius: 8px;
+            color: #dd6b20;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        /* ==========================================================================
+           5. تنسيق النوافذ المنبثقة للسياسات (Modals)
+           ========================================================================== */
         .modal {
             display: none;
             position: fixed;
@@ -291,209 +380,119 @@
             line-height: 1.6;
         }
 
-        .modal-content h3 {
-            color: #1a365d;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #f4f6f9;
-            padding-bottom: 10px;
-        }
+        .modal-content h3 { color: #1a365d; margin-bottom: 15px; border-bottom: 2px solid #f4f6f9; padding-bottom: 10px; }
+        .modal-content h4 { color: #2c5282; margin-top: 15px; margin-bottom: 5px; }
+        .modal-content p, .modal-content ul { font-size: 14px; color: #4a5568; margin-bottom: 10px; }
+        .modal-content ul { padding-right: 20px; }
+        .close-btn { background-color: #e53e3e; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; float: left; margin-top: 15px; }
 
-        .modal-content h4 {
-            color: #2c5282;
-            margin-top: 15px;
-            margin-bottom: 5px;
-        }
-
-        .modal-content p, .modal-content ul {
-            font-size: 14px;
-            color: #4a5568;
-            margin-bottom: 10px;
-        }
-
-        .modal-content ul {
-            padding-right: 20px;
-        }
-
-        .close-btn {
-            background-color: #e53e3e;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            float: left;
-            margin-top: 15px;
-            transition: background-color 0.3s;
-        }
-
-        .close-btn:hover {
-            background-color: #c53030;
+        @media (max-width: 600px) {
+            .grid-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-<body>
+<body id="mainBody" class="bg-login">
 
-    <nav class="navbar">
-        <div class="logo">بوابة الخدمات العامة</div>
-        <ul class="nav-links">
-            <li><a href="#home">الرئيسية</a></li>
-            <li class="dropdown">
-                <a href="#services">الخدمات ▾</a>
-                <ul class="dropdown-menu">
-                    <li><a href="#service1">الخدمات الإلكترونية</a></li>
-                    <li><a href="#service2">دليل المستخدم</a></li>
-                    <li><a href="#service3">الدعم الفني</a></li>
-                </ul>
-            </li>
-            <li><a href="https://maps.app.goo.gl/YJSD57iRR1AjEB487" target="_blank" rel="noopener noreferrer">عنواننا</a></li>
-        </ul>
-    </nav>
-
-    <main class="main-content">
-        <div class="login-container">
-            <h2>تسجيل الدخول الآمن</h2>
-            
-            <div id="messageBox" class="message-box"></div>
-
-            <form id="loginForm" onsubmit="return validateLogin(event)">
-                <div class="form-group">
-                    <label for="username">اسم المستخدم أو البريد الإلكتروني</label>
-                    <input type="text" id="username" required placeholder="أدخل اسم المستخدم">
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">كلمة المرور</label>
-                    <input type="password" id="password" required placeholder="أدخل كلمة المرور">
-                    <span class="toggle-password" id="passwordToggle" onclick="togglePasswordVisibility()">إظهار</span>
-                </div>
-
-                <div class="form-options">
-                    <label class="remember-me">
-                        <input type="checkbox" name="remember"> تذكرني
-                    </label>
-                    <a href="#forgot" class="forgot-password">نسيت كلمة المرور؟</a>
-                </div>
-
-                <button type="submit" class="btn-submit">تسجيل الدخول</button>
-            </form>
-        </div>
-    </main>
-
-    <footer class="footer">
-        <p>© 2026 بوابة الخدمات العامة. جميع الحقوق محفوظة.</p>
-        <div class="footer-links">
-            <button onclick="openModal('privacyModal')">سياسة الخصوصية</button>
-            <button onclick="openModal('termsModal')">شروط الاستخدام</button>
-        </div>
-    </footer>
-
-    <div id="privacyModal" class="modal">
-        <div class="modal-content">
-            <h3>سياسة الخصوصية</h3>
-            <p>مرحباً بكم في موقعنا الخاص نحن نلتزم بحماية خصوصيتك وبياناتك الشخصية. توضح هذه السياسة كيف نجمع معلوماتك ونستخدمها عندما تزور موقعنا.</p>
-            <h4>أولاً: البيانات التي نجمعها</h4>
-            <ul>
-                <li><strong>بيانات الهوية والتواصل:</strong> الاسم الكامل، البريد الإلكتروني، ورقم الهاتف (عند التسجيل أو الشراء).</li>
-                <li><strong>البيانات التقنية:</strong> عنوان بروتوكول الإنترنت (IP)، نوع المتصفح، ومعلومات الجهاز المستخدم تجمع تلقائياً عبر ملفات تعريف الارتباط (Cookies).</li>
-                <li><strong>البيانات المالية:</strong> تفاصيل بطاقات الدفع (يتم معالجتها بأمان عبر بوابة الدفع ولا نخزنها في خوادمنا).</li>
+    <div id="loginPage" style="display: flex; flex-direction: column; min-height: 100vh; width: 100%;">
+        <nav class="navbar">
+            <div class="logo">بوابة الخدمات العامة</div>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li class="dropdown">
+                    <a href="#services">الخدمات ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#service1">الخدمات الإلكترونية</a></li>
+                        <li><a href="#service2">دليل المستخدم</a></li>
+                        <li><a href="#service3">الدعم الفني</a></li>
+                    </ul>
+                </li>
+                <li><a href="https://maps.app.goo.gl/YJSD57iRR1AjEB487" target="_blank" rel="noopener noreferrer">عنواننا</a></li>
             </ul>
-            <h4>ثانياً: كيف نستخدم بياناتك؟</h4>
-            <ul>
-                <li>لإدارة حسابك وتقديم الخدمات أو المنتجات التي تطلبها.</li>
-                <li>لتحسين أداء الموقع وتجربة المستخدم.</li>
-                <li>لإرسال رسائل بريد إلكتروني تسويقية (يمكنك إلغاء الاشتراك بها في أي وقت).</li>
-            </ul>
-            <h4>ثالثاً: مشاركة البيانات مع أطراف ثالثة</h4>
-            <p>نحن لا نبيع بياناتك الشخصية. قد نشارك بعض البيانات فقط مع جهات موثوقة لتشغيل الموقع، مثل خدمات تحليلات جوجل (Google Analytics) لفهم كيفية استخدام الموقع.</p>
-            <h4>رابعاً: حقوقك القانونية</h4>
-            <p>لديك الحق في طلب نسخة من بياناتك المخزنة لدينا، أو تعديلها، أو طلب حذفها نهائياً عبر مراسلتنا على: [البريد الإلكتروني للدعم].</p>
-            <button class="close-btn" onclick="closeModal('privacyModal')">إغلاق</button>
-        </div>
+        </nav>
+
+        <main class="main-content login-section">
+            <div class="login-container">
+                <h2>تسجيل الدخول الآمن</h2>
+                <div id="messageBox" class="message-box"></div>
+
+                <form id="loginForm" onsubmit="return validateLogin(event)">
+                    <div class="form-group">
+                        <label for="username">اسم المستخدم أو البريد الإلكتروني</label>
+                        <input type="text" id="username" required placeholder="أدخل اسم المستخدم">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">كلمة المرور</label>
+                        <input type="password" id="password" required placeholder="أدخل كلمة المرور">
+                        <span class="toggle-password" id="passwordToggle" onclick="togglePasswordVisibility()">إظهار</span>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" name="remember"> تذكرني
+                        </label>
+                        <a href="#forgot" class="forgot-password">نسيت كلمة المرور؟</a>
+                    </div>
+
+                    <button type="submit" class="btn-submit">تسجيل الدخول</button>
+                </form>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 بوابة الخدمات العامة. جميع الحقوق محفوظة.</p>
+            <div class="footer-links">
+                <button onclick="openModal('privacyModal')">سياسة الخصوصية</button>
+                <button onclick="openModal('termsModal')">شروط الاستخدام</button>
+            </div>
+        </footer>
     </div>
 
-    <div id="termsModal" class="modal">
-        <div class="modal-content">
-            <h3>شروط الاستخدام (Terms of Service)</h3>
-            <p><small>تاريخ آخر تحديث: 2 يناير 2023</small></p>
-            <p style="margin-top: 10px;">باستخدامك لموقعنا، فإنك توافق على الالتزام بالشروط والأحكام التالية. إذا كنت لا توافق عليها، يرجى عدم استخدام الموقع.</p>
-            <h4>أولاً: شروط الحساب والأهلية</h4>
-            <ul>
-                <li>يجب ألا يقل عمر المستخدم عن [18 عاماً / أو سن الرشد في بلدك] لإنشاء حساب أو الشراء.</li>
-                <li>أنت مسؤول مسؤولية كاملة عن الحفاظ على سرية معلومات حسابك وكلمة المرور.</li>
-            </ul>
-            <h4>ثانياً: السلوك المحظور</h4>
-            <p>يحظر تماماً على المستخدم القيام بما يلي:</p>
-            <ul>
-                <li>استخدام الموقع لأي غرض غير قانوني أو ينتهك القوانين المحلية والدولية.</li>
-                <li>محاولة اختراق الموقع، أو نشر فيروسات، أو تعطيل خوادم الموقع.</li>
-                <li>نسخ أو إعادة استخدام المحتوى، النصوص، أو التصاميم الخاصة بالموقع دون إذن خطي مسبق (جميع الحقوق محفوظة).</li>
-            </ul>
-            <h4>ثالثاً: إخلاء المسؤولية (Limitation of Liability)</h4>
-            <p>نقدم خدماتنا "كما هي" دون أي ضمانات صريحة أو ضمنية. لا يتحمل الموقع المسؤولية عن أي أضرار مباشرة أو غير مباشرة ناتجة عن انقطاع الخدمة المؤقت، أو حدوث أخطاء تقنية خارجة عن إرادتنا.</p>
-            <h4>رابعاً: إلغاء الحسابات</h4>
-            <p>يحق لإدارة الموقع تعليق أو إنهاء حساب أي مستخدم بشكل فوري ودون إنذار مسبق إذا تبين أنه خالف أي بند من شروط الاستخدام.</p>
-            <h4>خامساً: القانون الحاكم</h4>
-            <p>تخضع هذه الشروط والأحكام وتفسر وفقاً قوانين [الولايات المتحدة الامريكية]، وتخضع أي نزاعات للاختصاص الحصري للمحاكم في تلك الدولة.</p>
-            <button class="close-btn" onclick="closeModal('termsModal')">إغلاق</button>
-        </div>
-    </div>
 
-    <script>
-        // دالة التحقق من بيانات تسجيل الدخول المحددة من قبلك
-        function validateLogin(event) {
-            event.preventDefault(); // منع النموذج من إرسال البيانات وتحديث الصفحة تلقائياً
+    <div id="dashboardPage" class="dashboard-section">
+        <header class="dashboard-header">
+            <div class="welcome-text">مرحباً بك، bassammohra26 👋</div>
+            <button class="btn-logout" onclick="logout()">تسجيل خروج آمن</button>
+        </header>
 
-            // تحديث قيم البيانات الصحيحة المطلوبة
-            const correctUsername = "bassammohra26";
-            const correctPassword = "Ba11Mo910";
+        <main class="dashboard-container">
+            <div class="intro-text">
+                عندما يقوم العميل بتسجيل الدخول إلى حسابه البنكي (سواء عبر تطبيق الهاتف أو الموقع الإلكتروني للبنك) باستخدام بياناته السرية (اسم المستخدم، كلمة المرور، ورمز التحقق OTP)، تظهر له لوحة التحكم الرئيسية (Dashboard). هذه اللوحة مصممة لتعطيه لمحة سريعة وشاملة عن وضعه المالي. إليك بالتفصيل ما يظهر للمستخدم عادةً:
+            </div>
 
-            // جلب القيم التي أدخلها المستخدم في الخانات
-            const usernameInput = document.getElementById("username").value;
-            const passwordInput = document.getElementById("password").value;
-            const messageBox = document.getElementById("messageBox");
+            <div class="grid-container">
+                <div class="card">
+                    <h3>📊 1. الملخص المالي والفرعي (Accounts Overview)</h3>
+                    <p>
+                        هذا أول ما تقع عليه عين المستخدم، ويشمل:<br><br>
+                        • <strong>الحسابات الجارية والتوفير:</strong> يظهر رقم الحساب (أو الآيبان IBAN محجوباً جزئياً للأمان) وبجانبه الرصيد الحالي (المبلغ الإجمالي) والرصيد المتاح (المبلغ الفعلي القابل للسحب أو الشحن بعد خصم العمليات المعلقة).<br>
+                        • <strong>البطاقات الائتمانية (Credit Cards):</strong> يظهر رقم البطاقة، الحد الائتماني الإجمالي، المبلغ المستحق الدفع، وتاريخ الاستحقاق.<br>
+                        • <strong>القروض والتمويل (Loans):</strong> إذا كان العميل مقترضاً، يظهر له إجمالي مبلغ القرض، المتبقي منه، وقيمة القسط الشهري القادم.
+                    </p>
+                </div>
 
-            // التحقق من صحة البيانات المدخلة
-            if (usernameInput === correctUsername && passwordInput === correctPassword) {
-                messageBox.textContent = "تم تسجيل الدخول بنجاح!";
-                messageBox.className = "message-box success-msg";
-            } else {
-                messageBox.textContent = "خطأ في بيانات الدخول! يرجى التحقق من اسم المستخدم أو كلمة المرور.";
-                messageBox.className = "message-box error-msg";
-            }
-        }
+                <div class="card">
+                    <h3>📜 2. كشف الحساب والعمليات الأخيرة (Recent Transactions)</h3>
+                    <p>
+                        جدول أو قائمة تُحدث لحظياً تعرض آخر العمليات التي تمت على الحساب:<br><br>
+                        • <strong>العمليات الواردة:</strong> (رواتب، تحويلات من أشخاص آخرين) وتظهر عادةً باللون الأخضر أو بعلامة (+).<br>
+                        • <strong>العمليات الصادرة:</strong> (مشتنيات من السوبرماركت، مدفوعات إلكترونية، سحب نقدي من الصراف) وتظهر باللون الأحمر أو بعلامة (-).<br>
+                        • <strong>تفاصيل العملية:</strong> تشمل التاريخ، الوقت، اسم التاجر أو الجهة، والمبلغ.
+                    </p>
+                </div>
 
-        // إظهار وإخفاء كلمة المرور
-        function togglePasswordVisibility() {
-            var passwordField = document.getElementById("password");
-            var toggleText = document.getElementById("passwordToggle");
-            
-            if (passwordField.type === "password") {
-                passwordField.type = "text";
-                toggleText.textContent = "إخفاء";
-            } else {
-                passwordField.type = "password";
-                toggleText.textContent = "إظهار";
-            }
-        }
+                <div class="card">
+                    <h3>⚡ 3. قائمة الخدمات والعمليات السريعة (Quick Actions / Services)</h3>
+                    <p>
+                        أزرار مختصرة تمكن المستخدم من إدارة أمواله فوراً:<br><br>
+                        • <strong>التحويل المالي:</strong> (بين حساباته الشخصية، لمحلي داخل الدولة، أو تحويل دولي).<br>
+                        • <strong>سداد الفواتير:</strong> (كهرباء، مياه، إنترنت، مخالفات مرورية) عبر الأنظمة المحلية مثل (سداد، فوري، إلخ).<br>
+                        • <strong>إدارة البطاقات:</strong> إمكانية تجميد البطاقة فوراً في حال ضياعها، تغيير الحد اليومي للشراء، أو تفعيل الشراء عبر الإنترنت.
+                    </p>
+                </div>
 
-        // فتح النافذة المنبثقة
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = "flex";
-        }
-
-        // إغلاق النافذة المنبثقة
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = "none";
-        }
-
-        // إغلاق النافذة عند الضغط خارج الصندوق
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = "none";
-            }
-        }
-    </script>
-
-</body>
-</html>
+                <div class="card">
+                    <h3>🛡️ 4. شريط الأمان والتنبيهات (Security & Notifications)</h3>
+                    <p>
+                        • <strong>آخر تسجيل دخول:</strong> يظهر تاريخ ووقت آخر مرة دخل فيها المستخدم للحساب (للتأكد من عدم وجود اختراق).<br>
+                        • <strong>رسائل التنبيه:</strong> إشعارات من البنك (مثلاً: تحديث بيانات الهوية، عروض القروض
