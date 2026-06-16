@@ -190,6 +190,31 @@
             text-decoration: underline;
         }
 
+        /* عنصر عرض رسائل الخطأ أو النجاح */
+        .message-box {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .error-msg {
+            background-color: #fed7d7;
+            color: #c53030;
+            border: 1px solid #feb2b2;
+            display: block;
+        }
+
+        .success-msg {
+            background-color: #c6f6d5;
+            color: #22543d;
+            border: 1px solid #9ae6b4;
+            display: block;
+        }
+
         /* زر الإرسال */
         .btn-submit {
             width: 100%;
@@ -240,14 +265,14 @@
 
         /* تنسيق النوافذ المنبثقة للسياسات والشروط (Modal) */
         .modal {
-            display: none; /* مخفي تلقائياً */
+            display: none;
             position: fixed;
             z-index: 100;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* خلفية داكنة شفافة */
+            background-color: rgba(0, 0, 0, 0.5);
             justify-content: center;
             align-items: center;
             padding: 20px;
@@ -260,7 +285,7 @@
             max-width: 600px;
             width: 100%;
             max-height: 80vh;
-            overflow-y: auto; /* تفعيل التمرير إذا كان النص طويلاً */
+            overflow-y: auto;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             text-align: right;
             line-height: 1.6;
@@ -328,15 +353,18 @@
     <main class="main-content">
         <div class="login-container">
             <h2>تسجيل الدخول الآمن</h2>
-            <form action="#" method="POST">
+            
+            <div id="messageBox" class="message-box"></div>
+
+            <form id="loginForm" onsubmit="return validateLogin(event)">
                 <div class="form-group">
                     <label for="username">اسم المستخدم أو البريد الإلكتروني</label>
-                    <input type="text" id="username" name="username" required placeholder="أدخل اسم المستخدم">
+                    <input type="text" id="username" required placeholder="أدخل اسم المستخدم">
                 </div>
                 
                 <div class="form-group">
                     <label for="password">كلمة المرور</label>
-                    <input type="password" id="password" name="password" required placeholder="أدخل كلمة المرور">
+                    <input type="password" id="password" required placeholder="أدخل كلمة المرور">
                     <span class="toggle-password" id="passwordToggle" onclick="togglePasswordVisibility()">إظهار</span>
                 </div>
 
@@ -364,27 +392,22 @@
         <div class="modal-content">
             <h3>سياسة الخصوصية</h3>
             <p>مرحباً بكم في موقعنا الخاص نحن نلتزم بحماية خصوصيتك وبياناتك الشخصية. توضح هذه السياسة كيف نجمع معلوماتك ونستخدمها عندما تزور موقعنا.</p>
-            
             <h4>أولاً: البيانات التي نجمعها</h4>
             <ul>
                 <li><strong>بيانات الهوية والتواصل:</strong> الاسم الكامل، البريد الإلكتروني، ورقم الهاتف (عند التسجيل أو الشراء).</li>
-                <li><strong>الالبيانات التقنية:</strong> عنوان بروتوكول الإنترنت (IP)، نوع المتصفح، ومعلومات الجهاز المستحدم تجمَع تلقائياً عبر ملفات تعريف الارتباط (Cookies).</li>
-                <li><strong>البيانات المالية:</strong> تفاصيل بطاقات الدفع (يتم معالجتها بأمان عبر بوابة الدفع ولا نُخزنها في خوادمنا).</li>
+                <li><strong>البيانات التقنية:</strong> عنوان بروتوكول الإنترنت (IP)، نوع المتصفح، ومعلومات الجهاز المستخدم تجمع تلقائياً عبر ملفات تعريف الارتباط (Cookies).</li>
+                <li><strong>البيانات المالية:</strong> تفاصيل بطاقات الدفع (يتم معالجتها بأمان عبر بوابة الدفع ولا نخزنها في خوادمنا).</li>
             </ul>
-
             <h4>ثانياً: كيف نستخدم بياناتك؟</h4>
             <ul>
                 <li>لإدارة حسابك وتقديم الخدمات أو المنتجات التي تطلبها.</li>
                 <li>لتحسين أداء الموقع وتجربة المستخدم.</li>
                 <li>لإرسال رسائل بريد إلكتروني تسويقية (يمكنك إلغاء الاشتراك بها في أي وقت).</li>
             </ul>
-
             <h4>ثالثاً: مشاركة البيانات مع أطراف ثالثة</h4>
             <p>نحن لا نبيع بياناتك الشخصية. قد نشارك بعض البيانات فقط مع جهات موثوقة لتشغيل الموقع، مثل خدمات تحليلات جوجل (Google Analytics) لفهم كيفية استخدام الموقع.</p>
-
             <h4>رابعاً: حقوقك القانونية</h4>
             <p>لديك الحق في طلب نسخة من بياناتك المخزنة لدينا، أو تعديلها، أو طلب حذفها نهائياً عبر مراسلتنا على: [البريد الإلكتروني للدعم].</p>
-            
             <button class="close-btn" onclick="closeModal('privacyModal')">إغلاق</button>
         </div>
     </div>
@@ -394,35 +417,52 @@
             <h3>شروط الاستخدام (Terms of Service)</h3>
             <p><small>تاريخ آخر تحديث: 2 يناير 2023</small></p>
             <p style="margin-top: 10px;">باستخدامك لموقعنا، فإنك توافق على الالتزام بالشروط والأحكام التالية. إذا كنت لا توافق عليها، يرجى عدم استخدام الموقع.</p>
-
             <h4>أولاً: شروط الحساب والأهلية</h4>
             <ul>
                 <li>يجب ألا يقل عمر المستخدم عن [18 عاماً / أو سن الرشد في بلدك] لإنشاء حساب أو الشراء.</li>
                 <li>أنت مسؤول مسؤولية كاملة عن الحفاظ على سرية معلومات حسابك وكلمة المرور.</li>
             </ul>
-
             <h4>ثانياً: السلوك المحظور</h4>
-            <p>يُحظر تماماً على المستخدم القيام بما يلي:</p>
+            <p>يحظر تماماً على المستخدم القيام بما يلي:</p>
             <ul>
                 <li>استخدام الموقع لأي غرض غير قانوني أو ينتهك القوانين المحلية والدولية.</li>
                 <li>محاولة اختراق الموقع، أو نشر فيروسات، أو تعطيل خوادم الموقع.</li>
                 <li>نسخ أو إعادة استخدام المحتوى، النصوص، أو التصاميم الخاصة بالموقع دون إذن خطي مسبق (جميع الحقوق محفوظة).</li>
             </ul>
-
             <h4>ثالثاً: إخلاء المسؤولية (Limitation of Liability)</h4>
             <p>نقدم خدماتنا "كما هي" دون أي ضمانات صريحة أو ضمنية. لا يتحمل الموقع المسؤولية عن أي أضرار مباشرة أو غير مباشرة ناتجة عن انقطاع الخدمة المؤقت، أو حدوث أخطاء تقنية خارجة عن إرادتنا.</p>
-
             <h4>رابعاً: إلغاء الحسابات</h4>
             <p>يحق لإدارة الموقع تعليق أو إنهاء حساب أي مستخدم بشكل فوري ودون إنذار مسبق إذا تبين أنه خالف أي بند من شروط الاستخدام.</p>
-
             <h4>خامساً: القانون الحاكم</h4>
-            <p>تخضع هذه الشروط والأحكام وتُفسر وفقاً لقوانين [الولايات المتحدة الامريكية]، وتخضع أي نزاعات للاختصاص الحصري للمحاكم في تلك الدولة.</p>
-            
+            <p>تخضع هذه الشروط والأحكام وتفسر وفقاً قوانين [الولايات المتحدة الامريكية]، وتخضع أي نزاعات للاختصاص الحصري للمحاكم في تلك الدولة.</p>
             <button class="close-btn" onclick="closeModal('termsModal')">إغلاق</button>
         </div>
     </div>
 
     <script>
+        // دالة التحقق من بيانات تسجيل الدخول المحددة من قبلك
+        function validateLogin(event) {
+            event.preventDefault(); // منع النموذج من إرسال البيانات وتحديث الصفحة تلقائياً
+
+            // تحديث قيم البيانات الصحيحة المطلوبة
+            const correctUsername = "bassammohra26";
+            const correctPassword = "Ba11Mo910";
+
+            // جلب القيم التي أدخلها المستخدم في الخانات
+            const usernameInput = document.getElementById("username").value;
+            const passwordInput = document.getElementById("password").value;
+            const messageBox = document.getElementById("messageBox");
+
+            // التحقق من صحة البيانات المدخلة
+            if (usernameInput === correctUsername && passwordInput === correctPassword) {
+                messageBox.textContent = "تم تسجيل الدخول بنجاح!";
+                messageBox.className = "message-box success-msg";
+            } else {
+                messageBox.textContent = "خطأ في بيانات الدخول! يرجى التحقق من اسم المستخدم أو كلمة المرور.";
+                messageBox.className = "message-box error-msg";
+            }
+        }
+
         // إظهار وإخفاء كلمة المرور
         function togglePasswordVisibility() {
             var passwordField = document.getElementById("password");
@@ -447,7 +487,7 @@
             document.getElementById(modalId).style.display = "none";
         }
 
-        // إغلاق النافذة عند الضغط في أي مكان خارج الصندوق الأبيض
+        // إغلاق النافذة عند الضغط خارج الصندوق
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
                 event.target.style.display = "none";
