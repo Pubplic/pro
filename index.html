@@ -180,9 +180,10 @@
         }
 
         .dashboard-container {
-            max-width: 1000px;
-            margin: 40px auto;
+            max-width: 1100px;
+            margin: 30px auto;
             padding: 0 20px;
+            width: 100%;
         }
 
         .intro-text {
@@ -190,27 +191,78 @@
             border-right: 4px solid #3b82f6;
             padding: 15px;
             border-radius: 4px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             color: #1e40af;
             line-height: 1.6;
+            font-weight: 500;
         }
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
             gap: 25px;
         }
 
         .card {
             background: white;
             border-radius: 8px;
-            padding: 25px;
+            padding: 22px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             border-top: 4px solid #3b82f6;
         }
 
-        .card h3 { color: #1e293b; margin-bottom: 12px; }
-        .card p { color: #334155; font-size: 14px; line-height: 1.7; }
+        .card h3 { color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px; font-size: 16px; }
+        
+        /* تنسيق كشوف البيانات الحقيقية */
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px dashed #e2e8f0;
+            font-size: 14px;
+        }
+        .data-row:last-child { border-bottom: none; }
+        .data-label { color: #64748b; font-weight: 500; }
+        .data-value { color: #0f172a; font-weight: bold; }
+        .amount-positive { color: #16a34a; }
+        
+        /* نمط التنبيهات الفارغة */
+        .empty-state {
+            text-align: center;
+            padding: 30px 10px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        .empty-state-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* تنسيق أزرار العمليات السريعة */
+        .quick-actions-layout {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .action-btn {
+            background-color: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 12px 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #1e293b;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        .action-btn:hover {
+            background-color: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
 
         .security-notice {
             background-color: #fff7ed;
@@ -218,7 +270,7 @@
             padding: 20px;
             border-radius: 8px;
             color: #c2410c;
-            margin-top: 30px;
+            margin-top: 25px;
             font-size: 14px;
         }
 
@@ -238,6 +290,11 @@
         }
 
         .close-btn { background-color: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; float: left; margin-top: 15px; }
+        
+        @media (max-width: 600px) {
+            .grid-container { grid-template-columns: 1fr; }
+            .quick-actions-layout { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body id="mainBody">
@@ -290,41 +347,80 @@
 
         <main class="dashboard-container">
             <div class="intro-text">
-                عندما يقوم العميل بتسجيل الدخول إلى حسابه البنكي باستخدام بياناته السرية (اسم المستخدم، كلمة المرور، ورمز التحقق OTP)، تظهر له لوحة التحكم الرئيسية (Dashboard). هذه اللوحة مصممة لتعطيه لمحة سريعة وشاملة عن وضعه المالي:
+                عندما يقوم العميل بتسجيل الدخول إلى حسابه البنكي باستخدام بياناته السرية (اسم المستخدم، كلمة المرور، ورمز التحقق OTP)، تظهر له لوحة التحكم الرئيسية (Dashboard) المحدثة ببيانات الحساب الفورية:
             </div>
 
             <div class="grid-container">
+                
                 <div class="card">
                     <h3>📊 1. الملخص المالي والفرعي (Accounts Overview)</h3>
-                    <p>
-                        • <strong>الحسابات الجارية والتوفير:</strong> يظهر رقم الحساب وبجانبه الرصيد الحالي والرصيد المتاح.<br>
-                        • <strong>البطاقات الائتمانية:</strong> يظهر رقم البطاقة، الحد الائتماني، والمبلغ المستحق الدفع.<br>
-                        • <strong>القروض والتمويل:</strong> يظهر إجمالي مبلغ القرض، المتبقي منه، وقيمة القسط الشهري.
-                    </p>
+                    
+                    <div class="data-row">
+                        <span class="data-label">الحساب الجاري الرئيسي (SA9300000012345678901...)</span>
+                        <span class="data-value amount-positive">45,210.50 ر.س</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">الرصيد المتاح للسحب</span>
+                        <span class="data-value amount-positive">45,210.50 ر.س</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">حساب الادخار والتوفير</span>
+                        <span class="data-value amount-positive">120,000.00 ر.س</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">بطاقة ائتمان فيزا بلاتينيوم (4556-xxxx)</span>
+                        <span class="data-value" style="color: #dc2626;">-1,420.00 ر.س</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">الحد الائتماني المتبقي للبطاقة</span>
+                        <span class="data-value">18,580.00 ر.س</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">التمويل الشخصي القائم (المتبقي)</span>
+                        <span class="data-value">84,000.00 ر.س</span>
+                    </div>
                 </div>
 
                 <div class="card">
                     <h3>📜 2. كشف الحساب والعمليات الأخيرة (Recent Transactions)</h3>
-                    <p>
-                        • <strong>العمليات الواردة:</strong> الرواتب والتحويلات وتظهر باللون الأخضر (+).<br>
-                        • <strong>العمليات الصادرة:</strong> المشتريات والمدفوعات الفورية وتظهر باللون الأحمر (-).
-                    </p>
+                    <div class="empty-state">
+                        <span class="empty-state-icon">📥</span>
+                        <p><strong>لا يوجد أي حوالات</strong> أو عمليات مالية صادرة أو واردة على الحساب خلال الـ 30 يوماً الماضية.</p>
+                    </div>
                 </div>
 
                 <div class="card">
                     <h3>⚡ 3. قائمة الخدمات والعمليات السريعة (Quick Actions)</h3>
-                    <p>
-                        • <strong>التحويل المالي:</strong> محلي، داخل البنك، أو دولي.<br>
-                        • <strong>سداد الفواتير:</strong> شحن الرصيد، دفع فواتير المياه، الكهرباء، والإنترنت.<br>
-                        • <strong>إدارة البطاقات:</strong> إمكانية تجميد أو إيقاف البطاقات فوراً.
-                    </p>
+                    <div class="quick-actions-layout">
+                        <div class="action-btn" onclick="triggerQuickActionAlert()">تحويل مالي جديد</div>
+                        <div class="action-btn" onclick="triggerQuickActionAlert()">سداد الفواتير</div>
+                        <div class="action-btn" onclick="triggerQuickActionAlert()">إدارة وتجميد البطاقات</div>
+                    </div>
+                    <div class="empty-state" style="padding: 10px 0; border-top: 1px solid #f1f5f9;">
+                        <span class="empty-state-icon" style="font-size: 20px;">🔄</span>
+                        <p><strong>لا يوجد أي حوالات</strong> أو أوامر مستديمة مجدولة بانتظار التنفيذ حالياً.</p>
+                    </div>
                 </div>
 
                 <div class="card">
-                    <h3>🛡️ 4. شريط الأمان والتنبيهات (Security)</h3>
-                    <p>
-                        • يظهر للمستخدم تاريخ ووقت آخر تسجيل دخول ناجح للتأكد من سلامة الحساب، مع إشعارات وتنبيهات فورية لتحديث البيانات بانتظام وتجنب الاحتيال.
-                    </p>
+                    <h3>🛡️ 4. شريط الأمان والتنبيهات (Security & Notifications)</h3>
+                    
+                    <div class="data-row">
+                        <span class="data-label">حالة الحساب الحالي</span>
+                        <span class="data-value amount-positive">نشط وآمن 🔒</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">تاريخ تسجيل الدخول الحالي</span>
+                        <span class="data-value" id="currentLoginTime">جاري التحميل...</span>
+                    </div>
+                    <div class="data-row">
+                        <span class="data-label">قناة ومكان الدخول المكتشفة</span>
+                        <span class="data-value">متصفح ويب آمن (Web Session)</span>
+                    </div>
+                    <div class="data-row" style="border-bottom: none; flex-direction: column; align-items: flex-start; gap: 5px;">
+                        <span class="data-label" style="color: #ea580c; font-weight: bold;">⚠️ تنبيهات معلقة من النظام:</span>
+                        <span class="data-value" style="font-size: 13px; font-weight: normal; color: #475569;">يرجى المبادرة بتحديث بيانات الهوية الوطنية/الإقامة لتفادي تجميد الخدمات البنكية الإلكترونية المؤقت خلال الفترة القادمة.</span>
+                    </div>
                 </div>
             </div>
 
@@ -339,7 +435,7 @@
 
     <script>
         function validateLogin(event) {
-            event.preventDefault(); // إيقاف إعادة تحميل الصفحة إجبارياً
+            event.preventDefault(); 
 
             const correctUsername = "bassammohra26";
             const correctPassword = "Ba11Mo910";
@@ -349,6 +445,10 @@
             const messageBox = document.getElementById("messageBox");
 
             if (usernameInput === correctUsername && passwordInput === correctPassword) {
+                // توليد تاريخ ووقت تسجيل الدخول الحالي بشكل تلقائي ديناميكي
+                const now = new Date();
+                document.getElementById("currentLoginTime").textContent = now.toLocaleString('ar-EG');
+
                 // تبديل الواجهات فوراً بنجاح
                 document.getElementById("loginPage").style.display = "none";
                 document.getElementById("mainBody").style.backgroundColor = "#f8fafc"; 
@@ -369,6 +469,10 @@
             document.getElementById("dashboardPage").style.display = "none";
             document.getElementById("mainBody").style.backgroundColor = "#0f172a";
             document.getElementById("loginPage").style.display = "flex";
+        }
+
+        function triggerQuickActionAlert() {
+            alert("عذراً، لا يوجد أي حوالات أو عمليات معلقة لتنفيذها في الوقت الحالي.");
         }
 
         function togglePasswordVisibility() {
