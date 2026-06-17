@@ -118,7 +118,6 @@
         }
 
         .error-msg { background-color: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; display: block; }
-        .success-msg { background-color: #dcfce7; color: #16a34a; border: 1px solid #86efac; display: block; }
 
         .btn-submit {
             width: 100%;
@@ -151,7 +150,7 @@
             margin: 0 10px;
         }
 
-        /* واجهة لوحة التحكم (مخفية تلقائياً) */
+        /* واجهة لوحة التحكم */
         .dashboard-section {
             display: none;
             flex-direction: column;
@@ -213,7 +212,6 @@
 
         .card h3 { color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px; font-size: 16px; }
         
-        /* تنسيق كشوف البيانات */
         .data-row {
             display: flex;
             justify-content: space-between;
@@ -226,7 +224,6 @@
         .data-value { color: #0f172a; font-weight: bold; }
         .amount-positive { color: #16a34a; }
         
-        /* نمط التنبيهات الفارغة */
         .empty-state {
             text-align: center;
             padding: 30px 10px;
@@ -239,7 +236,6 @@
             display: block;
         }
 
-        /* تنسيق أزرار العمليات السريعة */
         .quick-actions-layout {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -268,7 +264,6 @@
             border-color: #3b82f6;
         }
         
-        /* زر خاص تم قفله */
         .action-btn.locked {
             border-color: #fca5a5;
             background-color: #fff5f5;
@@ -301,7 +296,7 @@
             font-size: 14px;
         }
 
-        /* النوافذ المنبثقة العامة */
+        /* النوافذ المنبثقة */
         .modal {
             display: none;
             position: fixed;
@@ -316,7 +311,6 @@
             max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; text-align: right;
         }
 
-        /* نافذة القفل المنبثقة المخصصة لعمليات التحويل */
         .lock-modal-content {
             background-color: #ffffff;
             padding: 25px;
@@ -416,12 +410,12 @@
                 <form id="loginForm" onsubmit="return validateLogin(event)">
                     <div class="form-group">
                         <label>اسم المستخدم</label>
-                        <input type="text" id="username" required placeholder="bassammohra26" autofocus>
+                        <input type="text" id="username" required autofocus>
                     </div>
                     
                     <div class="form-group">
                         <label>كلمة المرور</label>
-                        <input type="password" id="password" required placeholder="••••••••">
+                        <input type="password" id="password" required>
                         <span class="toggle-password" id="passwordToggle" onclick="togglePasswordVisibility()">إظهار</span>
                     </div>
 
@@ -565,6 +559,7 @@
         function validateLogin(event) {
             event.preventDefault(); 
 
+            // تذكر أن بيانات الدخول الصحيحة ما زالت كما هي للتحقق برمجياً
             const correctUsername = "bassammohra26";
             const correctPassword = "Ba11Mo910";
 
@@ -597,11 +592,9 @@
             document.getElementById("loginPage").style.display = "flex";
         }
 
-        // التحكم بنافذة القفل المخصصة
         function openLockModal() { document.getElementById("lockModal").style.display = "flex"; }
         function closeLockModal() { document.getElementById("lockModal").style.display = "none"; }
 
-        // دالة زر "تحقق" لكود التحويل
         function verifyTransferCode() {
             const enteredCode = document.getElementById("verificationCode").value.trim();
             if(enteredCode === "") {
