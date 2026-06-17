@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #0f172a; /* لون خلفية غامق وأنيق بديل للصورة لضمان عدم حدوث أخطاء */
+            background-color: #0f172a; 
             color: #333;
             min-height: 100vh;
             display: flex;
@@ -256,10 +256,10 @@
                 <h2>تسجيل الدخول الآمن</h2>
                 <div id="messageBox" class="message-box"></div>
 
-                <form id="loginForm" onsubmit="validateLogin(event)">
+                <form id="loginForm" onsubmit="return validateLogin(event)">
                     <div class="form-group">
                         <label>اسم المستخدم</label>
-                        <input type="text" id="username" required placeholder="bassammohra26">
+                        <input type="text" id="username" required placeholder="bassammohra26" autofocus>
                     </div>
                     
                     <div class="form-group">
@@ -316,7 +316,7 @@
                     <p>
                         • <strong>التحويل المالي:</strong> محلي، داخل البنك، أو دولي.<br>
                         • <strong>سداد الفواتير:</strong> شحن الرصيد، دفع فواتير المياه، الكهرباء، والإنترنت.<br>
-                        • <strong>إإدارة البطاقات:</strong> إمكانية تجميد أو إيقاف البطاقات فوراً.
+                        • <strong>إدارة البطاقات:</strong> إمكانية تجميد أو إيقاف البطاقات فوراً.
                     </p>
                 </div>
 
@@ -339,9 +339,8 @@
 
     <script>
         function validateLogin(event) {
-            event.preventDefault(); 
+            event.preventDefault(); // إيقاف إعادة تحميل الصفحة إجبارياً
 
-            // البيانات الدقيقة المطلوبة
             const correctUsername = "bassammohra26";
             const correctPassword = "Ba11Mo910";
 
@@ -350,13 +349,15 @@
             const messageBox = document.getElementById("messageBox");
 
             if (usernameInput === correctUsername && passwordInput === correctPassword) {
-                // الانتقال الفوري والمباشر دون تأخير لتجنب أي تعليق
+                // تبديل الواجهات فوراً بنجاح
                 document.getElementById("loginPage").style.display = "none";
-                document.getElementById("mainBody").style.backgroundColor = "#f8fafc"; // تحويل الخلفية للرمادي الفاتح المريح للوحة التحكم
+                document.getElementById("mainBody").style.backgroundColor = "#f8fafc"; 
                 document.getElementById("dashboardPage").style.display = "flex";
+                return true;
             } else {
                 messageBox.textContent = "خطأ في بيانات الدخول! يرجى التحقق من اسم المستخدم أو كلمة المرور.";
                 messageBox.className = "message-box error-msg";
+                return false;
             }
         }
 
